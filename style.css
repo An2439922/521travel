@@ -201,22 +201,25 @@ a:hover {
     color: #ffffff;
 }
 
-.adventure-badge {
+.hero-logo-bubble {
     display: inline-flex;
     align-items: center;
-    gap: 8px;
-    padding: 8px 16px;
-    background: rgba(255,255,255,0.1);
+    justify-content: center;
+    width: 120px;
+    height: 120px;
+    background: rgba(255, 255, 255, 0.15);
     backdrop-filter: blur(10px);
     -webkit-backdrop-filter: blur(10px);
-    border: 1px solid rgba(255,255,255,0.2);
-    border-radius: 9999px;
-    font-size: 0.85rem;
-    font-weight: 600;
-    letter-spacing: 1px;
-    text-transform: uppercase;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    border-radius: 50%;
     margin-bottom: 30px;
-    color: #ffffff;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+}
+
+.hero-logo-bubble img {
+    width: 75%;
+    height: 75%;
+    object-fit: contain;
 }
 
 .hero-content h1 {
@@ -610,7 +613,22 @@ footer {
 
 /* Responsive Overrides */
 @media (max-width: 900px) {
-    .nav-links { display: none; } /* Hide horizontal menu on mobile for simplicity */
+    .nav-container {
+        flex-direction: column;
+        gap: 15px;
+        padding: 15px 20px;
+    }
+    
+    .nav-links { 
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 10px;
+    }
+    
+    .nav-indicator { 
+        display: none; /* Hide indicator on mobile due to wrapping */
+    }
     
     .hero-content h1 { font-size: 3.5rem; }
     
@@ -627,8 +645,46 @@ footer {
 }
 
 @media (max-width: 600px) {
+    section {
+        padding: 50px 0;
+    }
+
     .container { padding: 0 20px; }
-    .hero-content-left h1 { font-size: 2.8rem; }
+    
+    .hero-content {
+        padding-top: 60px;
+        padding-bottom: 60px;
+    }
+
+    .hero-content h1 { 
+        font-size: 2.8rem; 
+        margin-bottom: 16px;
+    }
+    
+    .about-text-content h2, .section-title, .adventure-content h2 {
+        font-size: 2.2rem;
+    }
+
+    .story-content h3 {
+        font-size: 1.8rem;
+    }
+
+    .bento-card {
+        padding: 24px;
+        border-radius: calc(var(--bento-radius) * 0.8);
+    }
+    
     .masonry-grid { column-count: 1; }
-    .footer-content { flex-direction: column; gap: 30px; text-align: center; }
+    
+    .footer-content { 
+        flex-direction: column; 
+        gap: 20px; 
+        text-align: center; 
+    }
+    
+    .social-links {
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 15px;
+    }
 }
