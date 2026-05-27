@@ -13,7 +13,12 @@ if (!$data) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title><?= htmlspecialchars($data['site']['title']) ?></title>
     <meta name="description" content="<?= htmlspecialchars($data['site']['description']) ?>">
-    <link rel="stylesheet" href="style.css?v=14">
+    <meta property="og:title" content="<?= htmlspecialchars($data['site']['title']) ?>">
+    <meta property="og:description" content="<?= htmlspecialchars($data['site']['description']) ?>">
+    <meta property="og:image" content="https://an2439922.github.io/521travel/<?= htmlspecialchars($data['hero']['image']) ?>">
+    <meta property="og:url" content="https://an2439922.github.io/521travel/">
+    <meta property="og:type" content="website">
+    <link rel="stylesheet" href="style.css?v=15">
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
 </head>
 <body>
