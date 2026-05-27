@@ -18,6 +18,8 @@ foreach ($files as $file) {
         }
     }
 }
+// Load data
+$data = json_decode(file_get_contents($dataFile), true);
 
 // Auth Logic
 if (isset($_POST['login'])) {
@@ -53,7 +55,8 @@ if (!isset($_SESSION['admin_logged_in'])) {
     </head>
     <body>
         <div class="login-box">
-            <h2>Вход</h2>
+            <img src="<?= htmlspecialchars($data['header']['logo']) ?>" alt="Logo" style="max-width: 120px; display: block; margin: 0 auto 15px;">
+            <h2 style="font-size: 1.2rem; margin-top: 0;">Админка 521-путешествия</h2>
             <?php if (isset($loginError)) echo "<div class='error'>$loginError</div>"; ?>
             <form method="POST">
                 <input type="password" name="password" placeholder="Пароль" required autofocus>
@@ -90,9 +93,6 @@ function uploadFile($fileInputName, $oldFilename = null) {
     }
     return $oldFilename;
 }
-
-// Load data
-$data = json_decode(file_get_contents($dataFile), true);
 
 // Save logic
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action'])) {
