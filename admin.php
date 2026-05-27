@@ -51,7 +51,52 @@ if (!isset($_SESSION['admin_logged_in'])) {
             button { background: #1a1a1a; color: white; border: none; padding: 12px; width: 100%; border-radius: 8px; font-size: 16px; cursor: pointer; transition: 0.3s; }
             button:hover { background: #333; }
             .error { color: red; margin-bottom: 15px; }
-        </style>
+            .gallery-item { background:#fff; padding:15px; border:1px solid #ddd; border-radius:8px; width:calc(50% - 10px); box-sizing:border-box; }
+        
+        @media (max-width: 768px) {
+            body { flex-direction: column; }
+            .sidebar { 
+                width: 100%; 
+                min-height: auto; 
+                position: sticky; 
+                top: 0; 
+                z-index: 100;
+                padding: 10px;
+                display: flex;
+                align-items: center;
+                overflow-x: auto;
+                white-space: nowrap;
+                box-sizing: border-box;
+                box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            }
+            .sidebar img { 
+                max-width: 40px !important; 
+                margin: 0 15px 0 0 !important; 
+            }
+            .nav-link { 
+                display: inline-block; 
+                padding: 10px 15px; 
+                border-left: none;
+                margin-right: 5px;
+                border-radius: 6px;
+            }
+            .nav-link.active, .nav-link:hover {
+                border-left: none;
+                background: #333;
+            }
+            .main-content { 
+                margin-left: 0; 
+                padding: 15px; 
+            }
+            .panel { padding: 20px; }
+            .gallery-item { width: 100%; }
+            a[href="?logout=1"] { margin-top: 0 !important; margin-left: 15px !important; }
+            .img-preview { max-width: 100%; height: auto; }
+            
+            /* Responsive stories */
+            .story-item .img-preview { float: none !important; margin-left: 0 !important; margin-bottom: 15px; width: 100%; }
+        }
+    </style>
     </head>
     <body>
         <div class="login-box">
@@ -219,6 +264,51 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action'])) {
         button.save:hover { background: #333; }
         .success-msg { background: #d4edda; color: #155724; padding: 15px; border-radius: 6px; margin-bottom: 20px; }
         .img-preview { max-width: 200px; max-height: 150px; margin-top: 10px; border-radius: 8px; border: 1px solid #ddd; object-fit: cover; }
+        .gallery-item { background:#fff; padding:15px; border:1px solid #ddd; border-radius:8px; width:calc(50% - 10px); box-sizing:border-box; }
+        
+        @media (max-width: 768px) {
+            body { flex-direction: column; }
+            .sidebar { 
+                width: 100%; 
+                min-height: auto; 
+                position: sticky; 
+                top: 0; 
+                z-index: 100;
+                padding: 10px;
+                display: flex;
+                align-items: center;
+                overflow-x: auto;
+                white-space: nowrap;
+                box-sizing: border-box;
+                box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            }
+            .sidebar img { 
+                max-width: 40px !important; 
+                margin: 0 15px 0 0 !important; 
+            }
+            .nav-link { 
+                display: inline-block; 
+                padding: 10px 15px; 
+                border-left: none;
+                margin-right: 5px;
+                border-radius: 6px;
+            }
+            .nav-link.active, .nav-link:hover {
+                border-left: none;
+                background: #333;
+            }
+            .main-content { 
+                margin-left: 0; 
+                padding: 15px; 
+            }
+            .panel { padding: 20px; }
+            .gallery-item { width: 100%; }
+            a[href="?logout=1"] { margin-top: 0 !important; margin-left: 15px !important; }
+            .img-preview { max-width: 100%; height: auto; }
+            
+            /* Responsive stories */
+            .story-item .img-preview { float: none !important; margin-left: 0 !important; margin-bottom: 15px; width: 100%; }
+        }
     </style>
 </head>
 <body>
@@ -385,7 +475,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action'])) {
         <hr>
         <h3>Текущие истории</h3>
         <?php foreach ($data['stories'] as $index => $story): ?>
-            <div style="background:#fff; padding:20px; border:1px solid #ddd; border-radius:8px; margin-bottom:20px;">
+            <div class="story-item" style="background:#fff; padding:20px; border:1px solid #ddd; border-radius:8px; margin-bottom:20px;">
                 <form method="POST" enctype="multipart/form-data">
                     <input type="hidden" name="action" value="edit_story">
                     <input type="hidden" name="index" value="<?= $index ?>">
@@ -427,7 +517,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action'])) {
         <h3>Текущие фотографии</h3>
         <div style="display:flex; flex-wrap:wrap; gap:20px;">
         <?php foreach ($data['gallery'] as $index => $item): ?>
-            <div style="background:#fff; padding:15px; border:1px solid #ddd; border-radius:8px; width:calc(50% - 10px); box-sizing:border-box;">
+            <div class="gallery-item">
                 <img src="<?= htmlspecialchars($item['image']) ?>" class="img-preview" style="width:100%; height:150px; margin-bottom:15px;"><br>
                 <form method="POST">
                     <input type="hidden" name="action" value="edit_gallery">
