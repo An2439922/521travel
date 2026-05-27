@@ -103,8 +103,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action'])) {
         $data['social']['vk'] = $_POST['vk'];
     }
     if ($_POST['action'] === 'save_meta') {
-        $data['title'] = $_POST['title'];
-        $data['description'] = $_POST['description'];
+        $data['meta']['title'] = $_POST['title'];
+        $data['meta']['description'] = $_POST['description'];
     }
     
     if ($_POST['action'] === 'save_header') {
@@ -246,11 +246,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action'])) {
             <input type="hidden" name="action" value="save_meta">
             <div class="form-group">
                 <label>Название сайта</label>
-                <input type="text" name="title" value="<?= htmlspecialchars($data['title']) ?>">
+                <input type="text" name="title" value="<?= htmlspecialchars($data['meta']['title'] ?? '') ?>">
             </div>
             <div class="form-group">
                 <label>Описание сайта</label>
-                <textarea name="description"><?= htmlspecialchars($data['description']) ?></textarea>
+                <textarea name="description"><?= htmlspecialchars($data['meta']['description'] ?? '') ?></textarea>
             </div>
             <button type="submit" class="save">Сохранить</button>
         </form>
