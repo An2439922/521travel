@@ -267,15 +267,15 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action'])) {
             </div>
             <div class="form-group">
                 <label>Ссылка 1</label>
-                <input type="text" name="nav_0" value="<?= htmlspecialchars($data['header']['nav'][0]['text']) ?>">
+                <input type="text" name="nav_0" value="<?= htmlspecialchars($data['header']['nav'][0]['text'] ?? '') ?>">
             </div>
             <div class="form-group">
                 <label>Ссылка 2</label>
-                <input type="text" name="nav_1" value="<?= htmlspecialchars($data['header']['nav'][1]['text']) ?>">
+                <input type="text" name="nav_1" value="<?= htmlspecialchars($data['header']['nav'][1]['text'] ?? '') ?>">
             </div>
             <div class="form-group">
                 <label>Ссылка 3</label>
-                <input type="text" name="nav_2" value="<?= htmlspecialchars($data['header']['nav'][2]['text']) ?>">
+                <input type="text" name="nav_2" value="<?= htmlspecialchars($data['header']['nav'][2]['text'] ?? '') ?>">
             </div>
             <button type="submit" class="save">Сохранить</button>
         </form>

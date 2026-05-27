@@ -27,8 +27,8 @@ if (!$data) {
         <div class="nav-container">
             <div class="nav-side">
                 <ul class="nav-links">
-                    <li><a href="#about" class="nav-link">ФИЛОСОФИЯ</a></li>
-                    <li><a href="#adventure" class="nav-link">ПРИКЛЮЧЕНИЯ</a></li>
+                    <li><a href="<?= htmlspecialchars($data['header']['nav'][0]['link']) ?>" class="nav-link"><?= htmlspecialchars(mb_strtoupper($data['header']['nav'][0]['text'])) ?></a></li>
+                    <li><a href="<?= htmlspecialchars($data['header']['nav'][1]['link']) ?>" class="nav-link"><?= htmlspecialchars(mb_strtoupper($data['header']['nav'][1]['text'])) ?></a></li>
                 </ul>
             </div>
             <div class="logo">
@@ -38,7 +38,7 @@ if (!$data) {
             </div>
             <div class="nav-side">
                 <ul class="nav-links">
-                    <li><a href="#story" class="nav-link">ИСТОРИИ</a></li>
+                    <li><a href="<?= htmlspecialchars($data['header']['nav'][2]['link']) ?>" class="nav-link"><?= htmlspecialchars(mb_strtoupper($data['header']['nav'][2]['text'])) ?></a></li>
                     <li><a href="#gallery" class="nav-link">ЖУРНАЛ</a></li>
                 </ul>
             </div>
