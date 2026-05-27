@@ -39,7 +39,7 @@ if (!$data) {
             <div class="nav-side">
                 <ul class="nav-links">
                     <li><a href="<?= htmlspecialchars($data['header']['nav'][2]['link']) ?>" class="nav-link"><?= htmlspecialchars(mb_strtoupper($data['header']['nav'][2]['text'])) ?></a></li>
-                    <li><a href="#gallery" class="nav-link">ЖУРНАЛ</a></li>
+                    <li><a href="<?= htmlspecialchars($data['header']['nav'][3]['link']) ?>" class="nav-link"><?= htmlspecialchars(mb_strtoupper($data['header']['nav'][3]['text'])) ?></a></li>
                 </ul>
             </div>
         </div>

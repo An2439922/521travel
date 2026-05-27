@@ -17,6 +17,10 @@
             {
                 "text": "ИСТОРИИ",
                 "link": "#story"
+            },
+            {
+                "text": "ЖУРНАЛ",
+                "link": "#gallery"
             }
         ]
     },

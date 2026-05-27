@@ -112,6 +112,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action'])) {
         $data['header']['nav'][0]['text'] = $_POST['nav_0'];
         $data['header']['nav'][1]['text'] = $_POST['nav_1'];
         $data['header']['nav'][2]['text'] = $_POST['nav_2'];
+        $data['header']['nav'][3]['text'] = $_POST['nav_3'];
     }
 
     if ($_POST['action'] === 'save_hero') {
@@ -276,6 +277,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action'])) {
             <div class="form-group">
                 <label>Ссылка 3</label>
                 <input type="text" name="nav_2" value="<?= htmlspecialchars($data['header']['nav'][2]['text'] ?? '') ?>">
+            </div>
+            <div class="form-group">
+                <label>Ссылка 4</label>
+                <input type="text" name="nav_3" value="<?= htmlspecialchars($data['header']['nav'][3]['text'] ?? '') ?>">
             </div>
             <button type="submit" class="save">Сохранить</button>
         </form>
