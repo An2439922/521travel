@@ -10,48 +10,55 @@ if (!$data) {
 <html lang="ru" data-theme="light">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title><?= htmlspecialchars($data['site']['title']) ?></title>
     <meta name="description" content="<?= htmlspecialchars($data['site']['description']) ?>">
-    <link rel="stylesheet" href="style.css">
-    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css?v=15">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
 </head>
 <body>
 
     <nav class="navbar">
         <div class="nav-container">
-            <div class="logo">
-                <img src="<?= htmlspecialchars($data['header']['logo']) ?>" alt="Logo">
-            </div>
-            <div class="nav-menu">
-                <div class="nav-indicator"></div>
+            <div class="nav-side">
                 <ul class="nav-links">
-                    <li><a href="#about" class="nav-link">Философия</a></li>
-                    <li><a href="#adventure" class="nav-link">Новые приключения</a></li>
-                    <li><a href="#story" class="nav-link">Истории</a></li>
-                    <li><a href="#gallery" class="nav-link">Журнал путешествий</a></li>
+                    <li><a href="#about" class="nav-link">ФИЛОСОФИЯ</a></li>
+                    <li><a href="#adventure" class="nav-link">ПРИКЛЮЧЕНИЯ</a></li>
                 </ul>
             </div>
-            <div class="nav-actions">
-                <button id="theme-toggle" class="theme-toggle" aria-label="Переключить тему">
-                    <svg class="sun-icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"></circle><line x1="12" y1="1" x2="12" y2="3"></line><line x1="12" y1="21" x2="12" y2="23"></line><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line><line x1="1" y1="12" x2="3" y2="12"></line><line x1="21" y1="12" x2="23" y2="12"></line><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line></svg>
-                    <svg class="moon-icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display: none;"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>
-                </button>
+            <div class="logo">
+                <a href="#" aria-label="Наверх">
+                    <img src="<?= htmlspecialchars($data['header']['logo']) ?>" alt="Logo">
+                </a>
+            </div>
+            <div class="nav-side">
+                <ul class="nav-links">
+                    <li><a href="#story" class="nav-link">ИСТОРИИ</a></li>
+                    <li><a href="#gallery" class="nav-link">ЖУРНАЛ</a></li>
+                </ul>
             </div>
         </div>
     </nav>
 
     <header class="hero">
-        <img class="hero-bg-image" src="<?= htmlspecialchars($data['hero']['image']) ?>" alt="<?= htmlspecialchars($data['hero']['title']) ?>">
-        <div class="hero-overlay"></div>
+        <div class="hero-bg-wrapper">
+            <img class="hero-bg-image" src="<?= htmlspecialchars($data['hero']['image']) ?>" alt="<?= htmlspecialchars($data['hero']['title']) ?>">
+        </div>
         <div class="hero-content container">
-            <div class="hero-logo-bubble reveal-text">
-                <img src="<?= htmlspecialchars($data['header']['logo']) ?>" alt="Logo">
-            </div>
-            <h1 class="reveal-text delay-1"><?= htmlspecialchars($data['hero']['title']) ?></h1>
-            <p class="reveal-text delay-2"><?= htmlspecialchars($data['hero']['subtitle']) ?></p>
-            <div class="reveal-text delay-3" style="margin-top: 30px;">
+            <h1 class="reveal-text delay-1">
+                <?php 
+                    $words = explode(' ', $data['hero']['title']);
+                    foreach($words as $word): 
+                ?>
+                    <span class="hero-word"><?= htmlspecialchars(mb_strtoupper($word, 'UTF-8')) ?></span>
+                <?php endforeach; ?>
+            </h1>
+            <p class="reveal-text delay-2"><?= htmlspecialchars(mb_strtoupper($data['hero']['subtitle'], 'UTF-8')) ?></p>
+            <div class="hero-actions reveal-text delay-2">
                 <a href="#about" class="btn">Читать далее</a>
+                <a href="<?= htmlspecialchars($data['social']['youtube']) ?>" target="_blank" rel="noopener noreferrer" class="btn hero-btn-social">YouTube</a>
+                <a href="<?= htmlspecialchars($data['social']['rutube']) ?>" target="_blank" rel="noopener noreferrer" class="btn hero-btn-social">RuTube</a>
+                <a href="<?= htmlspecialchars($data['social']['vk']) ?>" target="_blank" rel="noopener noreferrer" class="btn hero-btn-social"><span>ВКвидео</span></a>
             </div>
         </div>
     </header>
@@ -83,7 +90,7 @@ if (!$data) {
                         <div class="adventure-actions">
                             <a href="<?= htmlspecialchars($data['social']['youtube']) ?>" target="_blank" rel="noopener noreferrer" class="badge-btn">YouTube</a>
                             <a href="<?= htmlspecialchars($data['social']['rutube']) ?>" target="_blank" rel="noopener noreferrer" class="badge-btn">RuTube</a>
-                            <a href="<?= htmlspecialchars($data['social']['vk']) ?>" target="_blank" rel="noopener noreferrer" class="badge-btn">ВкВидео</a>
+                            <a href="<?= htmlspecialchars($data['social']['vk']) ?>" target="_blank" rel="noopener noreferrer" class="badge-btn"><span style="font-weight: 500;">ВКвидео</span></a>
                         </div>
                     </div>
                 </div>
@@ -136,11 +143,16 @@ if (!$data) {
 
         <section id="gallery" class="gallery-section fade-in-section">
             <div class="container">
-                <h2>Журнал Путешествий</h2>
+                <h2>Журнал путешествий</h2>
                 <div class="masonry-grid">
                     <?php foreach ($data['gallery'] as $image): ?>
-                        <div class="masonry-item">
+                        <div class="masonry-item" onclick="void(0)">
                             <img src="<?= htmlspecialchars($image) ?>" alt="Travel Photo" loading="lazy">
+                            <div class="masonry-overlay">
+                                <a href="<?= htmlspecialchars($data['social']['youtube']) ?>" target="_blank" rel="noopener noreferrer" class="btn masonry-btn-social" onclick="event.stopPropagation()">YouTube</a>
+                                <a href="<?= htmlspecialchars($data['social']['rutube']) ?>" target="_blank" rel="noopener noreferrer" class="btn masonry-btn-social" onclick="event.stopPropagation()">RuTube</a>
+                                <a href="<?= htmlspecialchars($data['social']['vk']) ?>" target="_blank" rel="noopener noreferrer" class="btn masonry-btn-social" onclick="event.stopPropagation()"><span style="font-weight: 500;">ВКвидео</span></a>
+                            </div>
                         </div>
                     <?php endforeach; ?>
                 </div>
@@ -152,18 +164,31 @@ if (!$data) {
         <div class="container">
             <div class="footer-content">
                 <div class="social-links">
-                    <?php foreach ($data['social'] as $platform => $url): ?>
-                        <a href="<?= htmlspecialchars($url) ?>" target="_blank" rel="noopener noreferrer"><?= ucfirst(htmlspecialchars($platform)) ?></a>
+                    <?php 
+                        $platformNames = [
+                            'youtube' => 'YouTube',
+                            'rutube' => 'RuTube',
+                            'vk' => '<span style="font-weight: 500;">ВКвидео</span>'
+                        ];
+                        foreach ($data['social'] as $platform => $url): 
+                            $name = isset($platformNames[$platform]) ? $platformNames[$platform] : ucfirst(htmlspecialchars($platform));
+                    ?>
+                        <a href="<?= htmlspecialchars($url) ?>" target="_blank" rel="noopener noreferrer"><?= $name ?></a>
                     <?php endforeach; ?>
                 </div>
                 <div class="admin-access">
-                    <a href="admin.php">Вход для администратора</a>
+                    <a href="admin.php" aria-label="Вход для администратора" style="opacity: 0.2; transition: opacity 0.3s;" onmouseover="this.style.opacity=1" onmouseout="this.style.opacity=0.2">
+                        <img src="<?= htmlspecialchars($data['header']['logo']) ?>" alt="Admin" style="height: 30px;">
+                    </a>
                 </div>
             </div>
-            <p class="copyright">&copy; <?= date('Y') ?> <?= htmlspecialchars($data['site']['title']) ?>. Все права защищены.</p>
+            <div class="footer-bottom" style="text-align: center; opacity: 0.5; font-size: 0.9rem; line-height: 1.8;">
+                <p>&copy; <?= date('Y') ?> <?= htmlspecialchars($data['site']['title']) ?>. Все права защищены.</p>
+                <p>Разработано и создано 521технолОджи</p>
+            </div>
         </div>
     </footer>
 
-    <script src="script.js"></script>
+    <script src="script.js?v=15"></script>
 </body>
 </html>

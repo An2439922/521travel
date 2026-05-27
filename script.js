@@ -1,4 +1,31 @@
 document.addEventListener('DOMContentLoaded', () => {
+    // Remove hash on load to prevent jumping if the user scrolled away
+    if (window.location.hash) {
+        setTimeout(() => {
+            history.replaceState('', document.title, window.location.pathname + window.location.search);
+        }, 10);
+    }
+
+    // Smooth scroll for nav links without changing URL hash
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function (e) {
+            e.preventDefault();
+            const targetId = this.getAttribute('href');
+            if (targetId === '#') {
+                window.scrollTo({
+                    top: 0,
+                    behavior: 'smooth'
+                });
+                return;
+            }
+            const target = document.querySelector(targetId);
+            if (target) {
+                target.scrollIntoView({
+                    behavior: 'smooth'
+                });
+            }
+        });
+    });
     
     // --- Theme Toggle ---
     const themeToggleBtn = document.getElementById('theme-toggle');
@@ -6,31 +33,36 @@ document.addEventListener('DOMContentLoaded', () => {
     const moonIcon = document.querySelector('.moon-icon');
     const htmlEl = document.documentElement;
 
-    // Check for saved theme preference or use system preference
-    const savedTheme = localStorage.getItem('theme');
-    const systemPrefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
-    
-    if (savedTheme === 'dark' || (!savedTheme && systemPrefersDark)) {
-        htmlEl.setAttribute('data-theme', 'dark');
-        updateToggleIcon('dark');
-    }
-
-    themeToggleBtn.addEventListener('click', () => {
-        const currentTheme = htmlEl.getAttribute('data-theme');
-        const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+    if (themeToggleBtn) {
+        // Load saved theme
+        const savedTheme = localStorage.getItem('theme');
+        const systemPrefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
         
-        htmlEl.setAttribute('data-theme', newTheme);
-        localStorage.setItem('theme', newTheme);
-        updateToggleIcon(newTheme);
-    });
+        if (savedTheme === 'dark' || (!savedTheme && systemPrefersDark)) {
+            htmlEl.setAttribute('data-theme', 'dark');
+            updateIcons('dark');
+        } else if (savedTheme === 'light') {
+            htmlEl.setAttribute('data-theme', 'light');
+            updateIcons('light');
+        }
 
-    function updateToggleIcon(theme) {
-        if (theme === 'dark') {
-            sunIcon.style.display = 'none';
-            moonIcon.style.display = 'block';
-        } else {
-            sunIcon.style.display = 'block';
-            moonIcon.style.display = 'none';
+        themeToggleBtn.addEventListener('click', () => {
+            const currentTheme = htmlEl.getAttribute('data-theme');
+            const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+            
+            htmlEl.setAttribute('data-theme', newTheme);
+            localStorage.setItem('theme', newTheme);
+            updateIcons(newTheme);
+        });
+
+        function updateIcons(theme) {
+            if (theme === 'dark') {
+                sunIcon.style.display = 'none';
+                moonIcon.style.display = 'block';
+            } else {
+                sunIcon.style.display = 'block';
+                moonIcon.style.display = 'none';
+            }
         }
     }
 
@@ -155,5 +187,55 @@ document.addEventListener('DOMContentLoaded', () => {
         
         // Initialize state
         updateCarousel();
+
+        // Touch swipe support
+        let startX = 0;
+        let endX = 0;
+        const carouselContainer = document.querySelector('.stories-carousel-container');
+
+        if (carouselContainer) {
+            carouselContainer.addEventListener('touchstart', (e) => {
+                startX = e.touches[0].clientX;
+            }, {passive: true});
+
+            carouselContainer.addEventListener('touchend', (e) => {
+                endX = e.changedTouches[0].clientX;
+                handleSwipe();
+            });
+        }
+        
+        function handleSwipe() {
+            let diffX = startX - endX;
+            if (Math.abs(diffX) > 40) {
+                if (diffX > 0 && currentIndex < maxIndex) {
+                    // Swipe left
+                    currentIndex++;
+                    updateCarousel();
+                } else if (diffX < 0 && currentIndex > 0) {
+                    // Swipe right
+                    currentIndex--;
+                    updateCarousel();
+                }
+            }
+        }
     }
+
+    // --- Gallery Mobile Interaction ---
+    const masonryItems = document.querySelectorAll('.masonry-item');
+    masonryItems.forEach(item => {
+        item.addEventListener('click', (e) => {
+            // Ignore clicks if they hit a button inside
+            if (e.target.closest('.masonry-btn-social')) return;
+
+            const isActive = item.classList.contains('active');
+            
+            // Remove active from all
+            masonryItems.forEach(i => i.classList.remove('active'));
+            
+            // Toggle the one we clicked
+            if (!isActive) {
+                item.classList.add('active');
+            }
+        });
+    });
 });

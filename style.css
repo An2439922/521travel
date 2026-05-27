@@ -43,6 +43,11 @@
     box-sizing: border-box;
 }
 
+html {
+    scroll-behavior: smooth;
+    scroll-padding-top: 130px;
+}
+
 body {
     font-family: 'Outfit', sans-serif;
     background-color: var(--bg-primary);
@@ -92,38 +97,39 @@ a:hover {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 20px 40px;
+    padding: 10px 40px;
     max-width: 1400px;
     margin: 0 auto;
 }
 
-.nav-menu {
-    position: relative;
+.logo {
     display: flex;
+    justify-content: center;
     align-items: center;
 }
 
-.nav-indicator {
-    position: absolute;
-    top: 50%;
-    left: 0;
-    height: 36px;
-    margin-top: -18px;
-    background-color: rgba(0, 0, 0, 0.05);
-    border-radius: 9999px;
-    transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
-    opacity: 0;
-    pointer-events: none;
-    z-index: 1;
+.logo img {
+    height: 100px;
+    width: auto;
 }
 
-[data-theme="dark"] .nav-indicator {
-    background-color: rgba(255, 255, 255, 0.1);
+.nav-side {
+    display: flex;
+    align-items: center;
+    flex: 1;
+    justify-content: flex-end;
+    padding-right: 30px;
+}
+
+.nav-side:last-child {
+    justify-content: flex-start;
+    padding-left: 30px;
+    padding-right: 0;
 }
 
 .nav-links {
     display: flex;
-    gap: 8px;
+    gap: 30px;
     list-style: none;
     position: relative;
     z-index: 2;
@@ -131,23 +137,21 @@ a:hover {
 
 .nav-links a {
     display: inline-block;
-    padding: 8px 16px;
-    font-size: 0.95rem;
-    font-weight: 500;
-    opacity: 0.7;
+    padding: 8px 0;
+    font-size: 0.9rem;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    opacity: 0.8;
+    color: var(--text-primary);
     transition: all 0.3s ease;
-    border-radius: 9999px;
+    text-transform: uppercase;
 }
 
 .nav-links a:hover, .nav-links a.active {
     opacity: 1;
-    color: var(--text-primary);
+    color: var(--accent-color);
 }
 
-.logo img {
-    height: 32px;
-    width: auto;
-}
 
 .theme-toggle {
     background: none;
@@ -171,74 +175,71 @@ a:hover {
 .hero {
     position: relative;
     width: 100%;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    background-color: var(--bg-primary); /* White/light background */
+    overflow: hidden;
+}
+
+.hero-bg-wrapper {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    width: 80%; /* Only takes right side */
+    height: 100%;
+    z-index: 1;
+    /* Beautiful smokey/watercolor mask blending into white on the left and bottom */
+    -webkit-mask-image: radial-gradient(ellipse at 70% 30%, rgba(0,0,0,1) 30%, rgba(0,0,0,0) 70%);
+    mask-image: radial-gradient(ellipse at 70% 30%, rgba(0,0,0,1) 30%, rgba(0,0,0,0) 70%);
 }
 
 .hero-bg-image {
     width: 100%;
-    height: auto;
+    height: 100%;
+    object-fit: cover;
     display: block;
     transform: scaleX(-1); /* Flips the image horizontally */
 }
 
-.hero-overlay {
-    position: absolute;
-    inset: 0;
-    background: linear-gradient(to top, rgba(0,0,0,0.8) 0%, rgba(0,0,0,0.2) 60%, rgba(0,0,0,0.4) 100%);
-    z-index: 1;
-}
-
 .hero-content {
-    position: absolute;
-    inset: 0;
+    position: relative;
     z-index: 2;
     display: flex;
     flex-direction: column;
     align-items: flex-start;
-    justify-content: flex-end;
-    text-align: left;
-    padding-bottom: 100px;
-    padding-top: 100px;
-    color: #ffffff;
-}
-
-.hero-logo-bubble {
-    display: inline-flex;
-    align-items: center;
     justify-content: center;
-    width: 120px;
-    height: 120px;
-    background: rgba(255, 255, 255, 0.15);
-    backdrop-filter: blur(10px);
-    -webkit-backdrop-filter: blur(10px);
-    border: 1px solid rgba(255, 255, 255, 0.3);
-    border-radius: 50%;
-    margin-bottom: 30px;
-    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+    text-align: left;
+    padding-top: 120px;
+    width: 100%;
+    pointer-events: none; /* Let clicks pass through to background if needed */
 }
 
-.hero-logo-bubble img {
-    width: 75%;
-    height: 75%;
-    object-fit: contain;
-}
-
-.hero-content h1 {
-    font-size: 5rem;
-    line-height: 1.1;
-    margin-bottom: 24px;
-    color: #ffffff;
-    max-width: 900px;
+.hero-word {
+    display: block;
+    font-size: 8rem;
+    line-height: 0.9;
+    font-weight: 800;
+    color: var(--text-primary); /* Black huge text */
+    letter-spacing: -0.04em;
+    pointer-events: auto;
 }
 
 .hero-content p {
     font-size: 1.25rem;
-    color: rgba(255,255,255,0.8);
+    color: var(--text-secondary);
+    margin-top: 30px;
     margin-bottom: 40px;
-    max-width: 600px;
+    max-width: 400px;
+    font-weight: 500;
+    letter-spacing: 0.05em;
+    pointer-events: auto;
 }
 
 /* Buttons */
 .btn {
+    font-family: 'Montserrat', sans-serif;
     display: inline-block;
     padding: 16px 40px;
     background-color: var(--text-primary);
@@ -256,22 +257,55 @@ a:hover {
     color: var(--bg-primary);
 }
 
+.hero-actions {
+    display: flex;
+    gap: 16px;
+    flex-wrap: wrap;
+    align-items: center;
+    pointer-events: auto;
+}
+
 /* Specific styling for the Hero button to ensure readability over dark backgrounds */
 .hero-content .btn {
-    background-color: #ffffff;
-    color: #09090b;
-    box-shadow: 0 4px 20px rgba(255, 255, 255, 0.15);
+    background-color: var(--accent-color);
+    color: #ffffff;
+    box-shadow: 0 4px 20px rgba(249, 115, 22, 0.3);
+    border: 2px solid transparent;
 }
 
 .hero-content .btn:hover {
-    background-color: #f4f4f5;
-    color: #000000;
-    box-shadow: 0 6px 24px rgba(255, 255, 255, 0.25);
+    background-color: transparent;
+    color: var(--accent-color);
+    border-color: var(--accent-color);
+    box-shadow: 0 6px 24px rgba(249, 115, 22, 0.4);
+}
+
+.hero-content .hero-btn-social {
+    background-color: transparent;
+    color: var(--text-primary);
+    border: 2px solid var(--text-primary);
+    box-shadow: none;
+}
+
+.hero-content .hero-btn-social:hover {
+    background-color: var(--text-primary);
+    color: var(--bg-primary);
+    box-shadow: 0 6px 24px rgba(0, 0, 0, 0.15);
 }
 
 [data-theme="dark"] .btn {
     background-color: var(--accent-color);
     color: #fff;
+}
+
+[data-theme="dark"] .hero-content .hero-btn-social {
+    color: var(--text-primary);
+    border-color: var(--text-primary);
+}
+
+[data-theme="dark"] .hero-content .hero-btn-social:hover {
+    background-color: var(--text-primary);
+    color: var(--bg-primary);
 }
 
 /* Bento Sections Common */
@@ -372,6 +406,7 @@ section {
 }
 
 .badge-btn {
+    font-family: 'Montserrat', sans-serif;
     display: inline-block;
     padding: 12px 24px;
     background-color: var(--bg-primary);
@@ -438,6 +473,7 @@ section {
     color: var(--text-primary);
     transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
     box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+    touch-action: manipulation;
 }
 
 .carousel-controls button:hover {
@@ -454,6 +490,7 @@ section {
     display: flex;
     gap: 40px;
     transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+    touch-action: pan-y pinch-zoom;
 }
 
 .carousel-slide {
@@ -530,16 +567,76 @@ section {
     border-radius: 24px;
     overflow: hidden;
     box-shadow: var(--bento-shadow);
+    position: relative;
+    cursor: pointer;
+    -webkit-mask-image: -webkit-radial-gradient(white, black); /* Fix Safari border-radius clipping without creating new GPU layers */
 }
 
 .masonry-item img {
     width: 100%;
     display: block;
     transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+    border-radius: inherit;
 }
 
-.masonry-item:hover img {
-    transform: scale(1.03);
+.masonry-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.6);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 12px;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    z-index: 2;
+    border-radius: inherit;
+}
+
+@media (hover: hover) {
+    .masonry-item:hover .masonry-overlay {
+        opacity: 1;
+        pointer-events: auto;
+    }
+    .masonry-item:hover img {
+        transform: scale(1.05);
+    }
+}
+
+.masonry-item.active .masonry-overlay {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+.masonry-item.active img {
+    transform: scale(1.05);
+}
+
+.masonry-btn-social {
+    padding: 10px 24px;
+    font-size: 0.95rem;
+    background-color: transparent;
+    color: #ffffff;
+    border: 2px solid #ffffff;
+    box-shadow: none;
+    width: 80%;
+    max-width: 200px;
+    text-align: center;
+}
+
+.masonry-btn-social:hover {
+    background-color: #ffffff;
+    color: #000000;
+    box-shadow: 0 6px 24px rgba(255, 255, 255, 0.25);
+}
+
+.masonry-item.active img {
+    transform: scale(1.05);
 }
 
 /* Footer */
@@ -611,26 +708,81 @@ footer {
     transform: none;
 }
 
-/* Responsive Overrides */
 @media (max-width: 900px) {
     .nav-container {
         flex-direction: column;
-        gap: 15px;
-        padding: 15px 20px;
+        gap: 10px;
+        padding: 10px 20px;
+    }
+    
+    .logo { order: 1; }
+    .logo img { height: 50px; }
+    
+    .nav-side {
+        width: 100%;
+        order: 2;
+        justify-content: center;
+        margin-bottom: 0;
+        padding: 0;
+    }
+    
+    .nav-side:last-child {
+        order: 3;
+        justify-content: center;
+        padding: 0;
     }
     
     .nav-links { 
         display: flex;
         flex-wrap: wrap;
         justify-content: center;
-        gap: 10px;
+        gap: 15px;
     }
     
-    .nav-indicator { 
-        display: none; /* Hide indicator on mobile due to wrapping */
+    .nav-links a { font-size: 0.85rem; }
+    
+    .hero-bg-wrapper {
+        width: 100%;
+        height: 45%;
+        top: auto;
+        bottom: 0;
+        -webkit-mask-image: linear-gradient(to bottom, rgba(0,0,0,0) 0%, rgba(0,0,0,1) 30%, rgba(0,0,0,1) 80%, rgba(0,0,0,0) 100%);
+        mask-image: linear-gradient(to bottom, rgba(0,0,0,0) 0%, rgba(0,0,0,1) 30%, rgba(0,0,0,1) 80%, rgba(0,0,0,0) 100%);
     }
     
-    .hero-content h1 { font-size: 3.5rem; }
+    .hero-bg-image { 
+        object-fit: cover;
+        object-position: center bottom; 
+    }
+    
+    .hero-word { font-size: 5rem; }
+    
+    .hero-actions {
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
+        align-items: flex-start;
+        gap: 8px;
+        width: 100%;
+        margin-top: 15px;
+    }
+    
+    .hero-actions .btn {
+        padding: 10px 18px;
+        font-size: 0.8rem;
+        text-align: center;
+        min-width: 140px;
+    }
+    
+    .hero-actions .hero-btn-social {
+        background-color: rgba(0, 0, 0, 0.4); /* Darker glass */
+        color: #ffffff;
+        border: 1px solid rgba(255, 255, 255, 0.2);
+        backdrop-filter: blur(8px);
+        -webkit-backdrop-filter: blur(8px);
+        font-weight: 600;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    }
     
     .about-grid, .adventure-card, .story-card { 
         grid-template-columns: 1fr; 
@@ -644,6 +796,19 @@ footer {
     .masonry-grid { column-count: 2; }
 }
 
+@media (max-height: 500px) and (orientation: landscape) {
+    .nav-container {
+        flex-direction: row;
+        padding: 5px 20px;
+    }
+    .logo { order: 2; }
+    .logo img { height: 35px; }
+    .nav-side { width: auto; order: 1; justify-content: flex-start; }
+    .nav-side:last-child { width: auto; order: 3; justify-content: flex-end; }
+    .hero { min-height: 120vh; }
+    .hero-content { padding-top: 80px; }
+}
+
 @media (max-width: 600px) {
     section {
         padding: 50px 0;
@@ -652,17 +817,60 @@ footer {
     .container { padding: 0 20px; }
     
     .hero-content {
-        padding-top: 60px;
-        padding-bottom: 60px;
+        padding-top: 40px;
+        padding-bottom: 40px;
+    }
+
+    .btn {
+        padding: 12px 24px;
+        font-size: 0.9rem;
     }
 
     .hero-content h1 { 
-        font-size: 2.8rem; 
         margin-bottom: 16px;
     }
     
-    .about-text-content h2, .section-title, .adventure-content h2 {
+    .hero-word { 
+        font-size: 3.5rem; 
+    }
+    
+    .section-header {
+        justify-content: space-between;
+        align-items: flex-end;
+    }
+
+    .section-title {
+        position: relative;
+        left: auto;
+        font-size: 2rem;
+        max-width: 65%;
+    }
+
+    .carousel-controls {
+        flex-shrink: 0;
+    }
+    
+    .carousel-controls button {
+        width: 40px;
+        height: 40px;
+    }
+
+    .about-text-content h2, .adventure-content h2 {
         font-size: 2.2rem;
+    }
+
+    .adventure-actions {
+        display: flex;
+        flex-direction: row;
+        gap: 8px;
+        flex-wrap: nowrap;
+    }
+    
+    .adventure-actions .badge-btn {
+        padding: 8px 0;
+        font-size: 0.8rem;
+        flex: 1;
+        text-align: center;
     }
 
     .story-content h3 {
