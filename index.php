@@ -18,7 +18,7 @@ if (!$data) {
     <meta property="og:image" content="https://an2439922.github.io/521travel/<?= htmlspecialchars($data['hero']['image']) ?>">
     <meta property="og:url" content="https://an2439922.github.io/521travel/">
     <meta property="og:type" content="website">
-    <link rel="stylesheet" href="style.css?v=15">
+    <link rel="stylesheet" href="style.css?v=16">
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
 </head>
 <body>
@@ -47,7 +47,7 @@ if (!$data) {
 
     <header class="hero">
         <div class="hero-bg-wrapper">
-            <img class="hero-bg-image" src="<?= htmlspecialchars($data['hero']['image']) ?>" alt="<?= htmlspecialchars($data['hero']['title']) ?>">
+            <img class="hero-bg-image" src="<?= htmlspecialchars($data['hero']['image']) ?>" alt="<?= htmlspecialchars($data['hero']['title']) ?>" decoding="async" fetchpriority="high">
         </div>
         <div class="hero-content container">
             <h1 class="reveal-text delay-1">
@@ -77,7 +77,7 @@ if (!$data) {
                         <p><?= nl2br(htmlspecialchars($data['about']['text'])) ?></p>
                     </div>
                     <div class="about-image-content">
-                        <img src="<?= htmlspecialchars($data['about']['image']) ?>" alt="<?= htmlspecialchars($data['about']['title']) ?>" loading="lazy">
+                        <img src="<?= htmlspecialchars($data['about']['image']) ?>" alt="<?= htmlspecialchars($data['about']['title']) ?>" loading="lazy" decoding="async">
                     </div>
                 </div>
             </div>
@@ -87,7 +87,7 @@ if (!$data) {
             <div class="container">
                 <div class="adventure-card bento-card">
                     <div class="adventure-image">
-                        <img src="<?= htmlspecialchars($data['adventure']['image']) ?>" alt="<?= htmlspecialchars($data['adventure']['title']) ?>" loading="lazy">
+                        <img src="<?= htmlspecialchars($data['adventure']['image']) ?>" alt="<?= htmlspecialchars($data['adventure']['title']) ?>" loading="lazy" decoding="async">
                     </div>
                     <div class="adventure-content">
                         <h2><?= htmlspecialchars($data['adventure']['title']) ?></h2>
@@ -137,7 +137,7 @@ if (!$data) {
                                 <?php endif; ?>
                             </div>
                             <div class="story-image">
-                                <img src="<?= htmlspecialchars($story['image']) ?>" alt="<?= htmlspecialchars($story['title']) ?>" loading="lazy">
+                                <img src="<?= htmlspecialchars($story['image']) ?>" alt="<?= htmlspecialchars($story['title']) ?>" loading="lazy" decoding="async">
                             </div>
                         </div>
                         <?php endforeach; ?>
@@ -152,7 +152,7 @@ if (!$data) {
                 <div class="masonry-grid">
                     <?php foreach ($data['gallery'] as $image): ?>
                         <div class="masonry-item" onclick="void(0)">
-                            <img src="<?= htmlspecialchars($image) ?>" alt="Travel Photo" loading="lazy">
+                            <img src="<?= htmlspecialchars($image) ?>" alt="Travel Photo" loading="lazy" decoding="async">
                             <div class="masonry-overlay">
                                 <a href="<?= htmlspecialchars($data['social']['youtube']) ?>" target="_blank" rel="noopener noreferrer" class="btn masonry-btn-social" onclick="event.stopPropagation()">YouTube</a>
                                 <a href="<?= htmlspecialchars($data['social']['rutube']) ?>" target="_blank" rel="noopener noreferrer" class="btn masonry-btn-social" onclick="event.stopPropagation()">RuTube</a>
