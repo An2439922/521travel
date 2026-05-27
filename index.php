@@ -93,9 +93,9 @@ if (!$data) {
                         <h2><?= htmlspecialchars($data['adventure']['title']) ?></h2>
                         <p><?= nl2br(htmlspecialchars($data['adventure']['text'])) ?></p>
                         <div class="adventure-actions">
-                            <a href="<?= htmlspecialchars($data['social']['youtube']) ?>" target="_blank" rel="noopener noreferrer" class="badge-btn">YouTube</a>
-                            <a href="<?= htmlspecialchars($data['social']['rutube']) ?>" target="_blank" rel="noopener noreferrer" class="badge-btn">RuTube</a>
-                            <a href="<?= htmlspecialchars($data['social']['vk']) ?>" target="_blank" rel="noopener noreferrer" class="badge-btn"><span style="font-weight: 500;">ВКвидео</span></a>
+                            <a href="<?= htmlspecialchars($data['adventure']['youtube']) ?>" target="_blank" rel="noopener noreferrer" class="badge-btn">YouTube</a>
+                            <a href="<?= htmlspecialchars($data['adventure']['rutube']) ?>" target="_blank" rel="noopener noreferrer" class="badge-btn">RuTube</a>
+                            <a href="<?= htmlspecialchars($data['adventure']['vk']) ?>" target="_blank" rel="noopener noreferrer" class="badge-btn"><span style="font-weight: 500;">ВКвидео</span></a>
                         </div>
                     </div>
                 </div>
@@ -150,13 +150,13 @@ if (!$data) {
             <div class="container">
                 <h2>Журнал путешествий</h2>
                 <div class="masonry-grid">
-                    <?php foreach ($data['gallery'] as $image): ?>
+                    <?php foreach ($data['gallery'] as $item): ?>
                         <div class="masonry-item" onclick="void(0)">
-                            <img src="<?= htmlspecialchars($image) ?>" alt="Travel Photo" loading="lazy" decoding="async">
+                            <img src="<?= htmlspecialchars($item['image']) ?>" alt="Travel Photo" loading="lazy" decoding="async">
                             <div class="masonry-overlay">
-                                <a href="<?= htmlspecialchars($data['social']['youtube']) ?>" target="_blank" rel="noopener noreferrer" class="btn masonry-btn-social" onclick="event.stopPropagation()">YouTube</a>
-                                <a href="<?= htmlspecialchars($data['social']['rutube']) ?>" target="_blank" rel="noopener noreferrer" class="btn masonry-btn-social" onclick="event.stopPropagation()">RuTube</a>
-                                <a href="<?= htmlspecialchars($data['social']['vk']) ?>" target="_blank" rel="noopener noreferrer" class="btn masonry-btn-social" onclick="event.stopPropagation()"><span style="font-weight: 500;">ВКвидео</span></a>
+                                <a href="<?= htmlspecialchars($item['youtube']) ?>" target="_blank" rel="noopener noreferrer" class="btn masonry-btn-social" onclick="event.stopPropagation()">YouTube</a>
+                                <a href="<?= htmlspecialchars($item['rutube']) ?>" target="_blank" rel="noopener noreferrer" class="btn masonry-btn-social" onclick="event.stopPropagation()">RuTube</a>
+                                <a href="<?= htmlspecialchars($item['vk']) ?>" target="_blank" rel="noopener noreferrer" class="btn masonry-btn-social" onclick="event.stopPropagation()"><span style="font-weight: 500;">ВКвидео</span></a>
                             </div>
                         </div>
                     <?php endforeach; ?>
